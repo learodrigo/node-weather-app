@@ -10,8 +10,11 @@
     </head>
 
     <body>
-        <h1>{{ title }}</h1>
+        {{>header}}
+
         <img src="/img/profile.jpeg" alt="Profile picture" />
         <p>Welcome back, {{ name }}!</p>
+
+        {{>footer}}
     </body>
 </html>
