@@ -1,4 +1,5 @@
 const MY_NAME = 'Leandro Rodrigo'
+const PORT = 3000
 
 const path = require('path')
 const express = require('express')
@@ -19,6 +20,7 @@ hbs.registerPartials(partialsPath)
 // Setup static directory to serve
 app.use(express.static(publicPath))
 
+// Home route
 app.get('', (req, res) => {
     res.render('index', {
         name: MY_NAME,
@@ -26,6 +28,7 @@ app.get('', (req, res) => {
     })
 })
 
+// About route
 app.get('/about', (req, res) => {
     res.render('about', {
         name: MY_NAME,
@@ -33,6 +36,7 @@ app.get('/about', (req, res) => {
     })
 })
 
+// Help route
 app.get('/help', (req, res) => {
     res.render('help', {
         message: 'Quis mollitia esse maxime doloremque accusamus qui sed.Reiciendis temporibus molestiae cupiditate sit ea recusandae velit.Corrupti non laboriosam illo.Repellendus unde saepe dolor sit rerum et ducimus praesentium',
@@ -41,7 +45,7 @@ app.get('/help', (req, res) => {
     })
 })
 
-// Forecast weather message
+// Weather route
 app.get('/weather', (req, res) => {
     res.send({
         forecast: `It's 11 degrees outside in New York City, New York, and there are chances to rain because there's 90% of humidity, and it feels like 8 degrees`,
@@ -50,7 +54,25 @@ app.get('/weather', (req, res) => {
     })
 })
 
+// 404 route for help pages
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        message: `This help article doesn't exist yet. Sorry :(`,
+        name: MY_NAME,
+        title: 'Article not found'
+    })
+})
+
+// 404 route
+app.get('*', (req, res) => {
+    res.render('404', {
+        message: `Looks like you're looking for a page that doens't exist :(`,
+        name: MY_NAME,
+        title: 'Error 404 - Page not found'
+    })
+})
+
 // Run at PORT
-app.listen(3000, () => {
-    console.log('Server is running on port 3000')
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
 })
