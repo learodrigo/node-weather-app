@@ -68,7 +68,7 @@ app.get('*', (req, res) => {
     res.render('404', {
         message: `Looks like you're looking for a page that doens't exist :(`,
         name: MY_NAME,
-        title: 'Error 404 - Page not found'
+        title: 'Page not found'
     })
 })
 
