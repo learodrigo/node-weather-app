@@ -2,10 +2,9 @@ require('dotenv').config()
 
 // Constants
 const MY_NAME = 'Leandro Rodrigo'
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 // Modules
-const chalk = require('chalk')
 const express = require('express')
 const hbs = require('hbs')
 const path = require('path')

@@ -1,13 +1,14 @@
 {
-  "name": "web-server",
+  "name": "node-weather-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This application done with node, is a basic weather website that given a city name, returns some basic information about the weather in that specific time",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.js -e js,hbs"
+    "dev": "nodemon src/app.js -e js,hbs",
+    "start": "node src/app.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["node", "javascript", "weather-forecast"],
+  "author": "Leandro Rodrigo",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
