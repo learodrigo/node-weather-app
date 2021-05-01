@@ -1,15 +1,20 @@
 require('dotenv').config()
+
+// Constants
 const MY_NAME = 'Leandro Rodrigo'
 const PORT = 3000
 
-const path = require('path')
+// Modules
+const chalk = require('chalk')
 const express = require('express')
 const hbs = require('hbs')
-const chalk = require('chalk')
+const path = require('path')
 
-const geocode = require('./utils/geocode')
+// Utils
 const forecast = require('./utils/forecast')
+const geocode = require('./utils/geocode')
 
+// App
 const app = express()
 
 // Define paths for express config
@@ -60,26 +65,22 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    geocode(city, (err, { latitude, longitude, placeName } = {}) => {
-        if (err) console.log(chalk.red(err))
-
-        if (latitude || longitude || placeName) {
-            forecast({ latitude, longitude, placeName }, (err, forecastData) => {
-                if (err) console.log(chalk.red(err))
-
-                if (forecastData) {
-                    console.log(chalk.bold(placeName))
-                    console.log(forecastData)
-                }
-            })
+    geocode(city, (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+            return res.send({ error })
         }
-    })
 
-    res.send({
-        address: city,
-        forecast: `It's 11 degrees outside in New York City, New York, and there are chances to rain because there's 90% of humidity, and it feels like 8 degrees`,
-        locatoion: 'NYC',
-        name: MY_NAME
+        forecast({ latitude, longitude, location }, (error, forecastData) => {
+            if (error) {
+                return res.send({ error })
+            }
+
+            res.send({
+                forecast: forecastData,
+                location,
+                address: city
+            })
+        })
     })
 })
 
