@@ -12,10 +12,10 @@ const forecast = ({ latitude, longitude }, callback) => {
             return callback(`Looks like your request to weather stack failed. Checkout the full message for details. Check the error: ${body.error}`)
         }
 
-        const { name, region } = body.location
+        const { name } = body.location
         const { feelslike, humidity, temperature } = body.current
 
-        callback(undefined, `It's ${temperature} degrees outside in ${name}, ${region} and there are chances to rain because there's ${humidity}% of humidity, and it feels like ${feelslike} degrees`)
+        callback(undefined, `It's ${temperature} degrees outside in ${name}, and there is ${humidity}% of humidity, and it feels like ${feelslike} degrees`)
     })
 }
 
