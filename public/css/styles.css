@@ -1,8 +1,6 @@
 * {
     box-sizing: border-box;
     font-family: monospace;
-    margin: 0;
-    padding: 0;
 }
 
 body {
@@ -31,6 +29,7 @@ h1 {
 
 header nav ul {
     list-style-type: none;
+    padding: 0;
 }
 
 header nav ul li {
@@ -51,6 +50,29 @@ nav ul li a:hover {
 .portrait {
     width: 250px;
 }
+
+input {
+    border: 1px solid #ccc;
+    outline: none;
+    padding: 8px;
+}
+
+input:hover {
+    background-color: #ccc;
+}
+
+button {
+    background-color: #888;
+    border: 1px solid #888;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+}
+
+button:hover {
+    background-color: #333;
+}
+
 
 footer {
     color: #888;
