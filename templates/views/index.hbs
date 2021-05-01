@@ -14,6 +14,13 @@
     <body>
         <div class="main-content">
             {{>header}}
+
+            <p>Get weather information from anywhere, you name it</p>
+
+            <form id="weatherForm">
+                <input required title="City text input" type="text" name="city" id="city" placeholder="Type a city..." />
+                <button title="Submit button" aria-label="Submit button" type="submit">Submit</button>
+            </form>
         </div>
 
         {{>footer}}

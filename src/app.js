@@ -55,7 +55,7 @@ app.get('/help', (req, res) => {
     })
 })
 
-// Weather route
+// Weather endpoint
 app.get('/weather', (req, res) => {
     const city = req.query.address
 
