@@ -47,7 +47,14 @@ app.get('/help', (req, res) => {
 
 // Weather route
 app.get('/weather', (req, res) => {
+    if (!req.query.address) {
+        return res.send({
+            error: 'Address is a require term'
+        })
+    }
+
     res.send({
+        address: req.query.address,
         forecast: `It's 11 degrees outside in New York City, New York, and there are chances to rain because there's 90% of humidity, and it feels like 8 degrees`,
         locatoion: 'NYC',
         name: MY_NAME
