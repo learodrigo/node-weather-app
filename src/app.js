@@ -1,9 +1,14 @@
+require('dotenv').config()
 const MY_NAME = 'Leandro Rodrigo'
 const PORT = 3000
 
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const chalk = require('chalk')
+
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 const app = express()
 
@@ -47,14 +52,31 @@ app.get('/help', (req, res) => {
 
 // Weather route
 app.get('/weather', (req, res) => {
-    if (!req.query.address) {
+    const city = req.query.address
+
+    if (!city) {
         return res.send({
             error: 'Address is a require term'
         })
     }
 
+    geocode(city, (err, { latitude, longitude, placeName } = {}) => {
+        if (err) console.log(chalk.red(err))
+
+        if (latitude || longitude || placeName) {
+            forecast({ latitude, longitude, placeName }, (err, forecastData) => {
+                if (err) console.log(chalk.red(err))
+
+                if (forecastData) {
+                    console.log(chalk.bold(placeName))
+                    console.log(forecastData)
+                }
+            })
+        }
+    })
+
     res.send({
-        address: req.query.address,
+        address: city,
         forecast: `It's 11 degrees outside in New York City, New York, and there are chances to rain because there's 90% of humidity, and it feels like 8 degrees`,
         locatoion: 'NYC',
         name: MY_NAME
