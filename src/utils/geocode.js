@@ -8,7 +8,7 @@ const geocode = (city, callback) => {
             return callback(`Unable to connect to location services. Check out the full error ${err}`)
         }
 
-        if (!body.features) {
+        if (!body.features.length) {
             const msg = city ?
                 `Your search was ${city}, but we couldn't find it. Try again` :
                 'You forgot to add a city when running the script. Try with "La Plata" or "Hong Kong"'
